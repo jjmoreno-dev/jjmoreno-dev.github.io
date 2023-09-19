@@ -1,0 +1,32 @@
+---
+import { Icon } from 'astro-icon'
+import TypingText from '@/components/TypingText.vue';
+---
+
+<section class="lg:flex items-center justify-around gap-20">
+    <img class="lg:hidden md:w-64 md:h-64 w-56 h-56 rounded-full mx-auto border-8 border-gray-200 dark:border-gray-800" src="./images/dani.webp" alt="Dani's face">
+    <div class="my-10">
+        <div class="pb-4">
+            <div class="text-5xl font-bold pb-1">Daniel Martinez</div>
+            <TypingText client:visible type-speed={75} cursor-speed={420} pause-start={20} pause-end={500} return-to-char-index={8} original-text="Full Stuck Developer" corrected-text="Full Stack Developer"/>
+        </div>
+        <p class="text-sm md:text-lg">
+            <span x-text="text"></span>
+            I am a reconverted engineer passionate about web development and computing science. I have a soft spot for the backend, but I cannot conceive of developing without design and user experience in mind.
+        </p>
+        <div class="mt-5 flex items-center justify-between">
+            <div class="flex gap-6">
+                <a href="https://github.com/orphail" target="_blank" aria-label="link to github">
+                    <Icon class="cursor-pointer transition hover:-translate-y-1" pack="mdi" name="github" size="2x" />
+                </a>
+                <a href="https://linkedin.com/in/dani-martinez-fernandez" target="_blank" aria-label="link to linkedin">
+                    <Icon class="cursor-pointer transition hover:-translate-y-1" pack="mdi" name="linkedin" size="2x" />
+                </a>
+            </div>
+            <a href="#contact" class="px-5 py-3 dark:bg-gray-700 bg-gray-900 dark:text-gray-100 dark:hover:text-red-600 hover:bg-gray-700 text-gray-100 rounded-lg">
+                Summon me
+            </a>
+        </div>
+    </div>
+    <img class="hidden lg:block w-64 h-64 rounded-full mx-auto border-8 border-gray-200 dark:border-gray-800" src="./images/dani.webp" alt="Dani's face">
+</section>

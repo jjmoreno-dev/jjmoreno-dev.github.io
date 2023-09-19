@@ -1,0 +1,107 @@
+---
+import Header from '@/components/Header.astro';
+import Footer from '@/components/Footer.astro';
+import ScrollToTop from '@/components/ScrollToTop.astro';
+
+export interface Props {
+	title: string;
+}
+
+const { title } = Astro.props as Props;
+---
+
+<!DOCTYPE html>
+<html lang="en" id="top">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="description" content="Orphail's portfolio">
+		<meta property="og:title" content="Orphail Dev"/>
+		<meta property="og:description" content="Orphail's portfolio"/>
+		<meta property="og:image" content="./favicon-32x32.png"/>	
+		<link rel="icon" type="image/png" href="/favicon-32x32.png" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css?family=JetBrains%20Mono&display=swap" rel="stylesheet preload prefetch" as="style">
+		<meta name="generator" content={Astro.generator} />
+		<title>{title}</title>
+		<script is:inline>
+			if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+				document.documentElement.classList.add('dark');
+			} else {
+				document.documentElement.classList.remove('dark');
+			}
+		</script>
+	</head>
+	<body class="antialiased bg-gray-100 dark:bg-gray-900 sm:mb-0 mb-11 transition-colors duration-300">
+		<Header/>
+		<div class="relative flex items-top justify-center min-h-screen sm:items-center dark:text-gray-100 text-gray-900 mb-32 mt-20">
+			<slot />
+		</div>
+		<Footer/>
+		<ScrollToTop/>
+	</body>
+</html>
+<style is:global>
+	html {
+		font-family: 'JetBrains Mono', monospace;
+	}
+    .button-focus {
+        @apply focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700;
+    }
+    .link {
+        @apply relative after:absolute dark:after:bg-gray-200 after:bg-gray-900 after:bottom-0 after:left-0 after:h-[2px] after:w-full after:origin-bottom-left after:scale-x-100 hover:after:origin-bottom-right hover:after:scale-x-0 after:transition-transform after:ease-in-out after:duration-300
+    }
+	.concealed {
+		opacity: 0;
+		filter: blur(5px);
+		transform: translateX(-25%);
+		transition: all 750ms;
+	}
+	@media(prefers-reduced-motion) {
+		.concealed {
+			transition: none;
+		}
+	}
+	.revealed {
+		opacity: 1;
+		filter: blur(0);
+		transform: translateX(0);
+	}
+
+	.tech:nth-child(1) {
+		transition-delay: 100ms;
+	}
+	.tech:nth-child(2) {
+		transition-delay: 200ms;
+	}
+	.tech:nth-child(3) {
+		transition-delay: 300ms;
+	}
+	.tech:nth-child(4) {
+		transition-delay: 400ms;
+	}
+	.tech:nth-child(5) {
+		transition-delay: 500ms;
+	}
+
+</style>
+<script>
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            document.querySelector(this.getAttribute('href')).scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+    });
+	const observer = new IntersectionObserver((entries) => {
+		entries.forEach((entry) => {
+			if (entry.isIntersecting) {
+				entry.target.classList.add('revealed')
+			}
+		});
+	}, {threshold: 0.50});
+
+	const hiddenElements = document.querySelectorAll('.concealed');
+	hiddenElements.forEach((el) => observer.observe(el))
+</script>
