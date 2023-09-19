@@ -10,5 +10,4 @@ export default defineConfig({
   integrations: [tailwind(), alpinejs(), vue()],
   resolveJsonModule: true,
     site: 'https://jjmoreno-dev.github.io',
-  base: '/jjmoreno-dev.github.io',
 });
