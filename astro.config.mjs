@@ -8,5 +8,7 @@ import vue from "@astrojs/vue";
 // https://astro.build/config
 export default defineConfig({
   integrations: [tailwind(), alpinejs(), vue()],
-  resolveJsonModule: true
+  resolveJsonModule: true,
+    site: 'https://jjmoreno-dev.github.io',
+  base: '/jjmoreno-dev.github.io',
 });
